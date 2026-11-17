@@ -1,7 +1,7 @@
 import { test, expect, gotoStorefront } from '../../fixtures/osp-test.js';
 import { publicPages } from '../../fixtures/storefront-data.js';
 
-test.describe('Public pages @smoke @regression @production', () => {
+test.describe('Public pages', { tag: ['@smoke', '@regression', '@production'] }, () => {
   for (const [index, entry] of publicPages.entries()) {
     const id = `OSP-NAV-${String(index + 1).padStart(3, '0')}`;
 

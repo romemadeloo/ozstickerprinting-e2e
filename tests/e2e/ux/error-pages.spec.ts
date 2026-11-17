@@ -1,7 +1,7 @@
 import { test, expect, gotoStorefront } from '../../fixtures/osp-test.js';
 import { notFound } from '../../fixtures/storefront-data.js';
 
-test.describe('Error pages @regression @production', () => {
+test.describe('Error pages', { tag: ['@regression', '@production'] }, () => {
   test.use({ allowNotFoundPaths: [notFound.path] });
 
   test('OSP-UX-001 an unknown URL returns 404 with the not-found page', async ({ page }) => {

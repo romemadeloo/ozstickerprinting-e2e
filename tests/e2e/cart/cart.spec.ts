@@ -4,7 +4,7 @@ import { ProductConfigPage } from '../../pom/product-config-page.js';
 import { cart, dieCut } from '../../fixtures/storefront-data.js';
 import { runCartE2E } from '../../fixtures/env.js';
 
-test.describe('Cart page @regression @production', () => {
+test.describe('Cart page', { tag: ['@regression', '@production'] }, () => {
   test('OSP-CRT-001 a guest sees an empty cart page', async ({ page }) => {
     await gotoStorefront(page, '/cart');
 
@@ -14,7 +14,7 @@ test.describe('Cart page @regression @production', () => {
 
 // "Add to Cart" calls cart-items/create immediately, before the artwork modal, so this writes data.
 // It never runs on production and needs RUN_CART_E2E=true on a dev server.
-test.describe('Add to cart @destructive @regression', () => {
+test.describe('Add to cart', { tag: ['@destructive', '@regression'] }, () => {
   test('OSP-CRT-002 a guest adds die cut stickers and skips artwork', async ({ page }) => {
     refuseProduction();
     test.skip(!runCartE2E, 'RUN_CART_E2E is not true');

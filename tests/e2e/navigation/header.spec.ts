@@ -2,7 +2,7 @@ import { test, expect, gotoStorefront } from '../../fixtures/osp-test.js';
 import { Header } from '../../pom/header.js';
 import { cart, nav } from '../../fixtures/storefront-data.js';
 
-test.describe('Header navigation @smoke @regression @production', () => {
+test.describe('Header navigation', { tag: ['@smoke', '@regression', '@production'] }, () => {
   test.beforeEach(async ({ page }) => {
     await gotoStorefront(page, '/');
   });

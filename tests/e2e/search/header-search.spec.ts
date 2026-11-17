@@ -2,8 +2,8 @@ import { test, expect, gotoStorefront } from '../../fixtures/osp-test.js';
 import { Header } from '../../pom/header.js';
 import { search } from '../../fixtures/storefront-data.js';
 
-test.describe('Header search @regression @production', () => {
-  test('OSP-SRCH-001 typing a product name suggests that product @smoke', async ({ page }) => {
+test.describe('Header search', { tag: ['@regression', '@production'] }, () => {
+  test('OSP-SRCH-001 typing a product name suggests that product', { tag: '@smoke' }, async ({ page }) => {
     const header = new Header(page);
     await gotoStorefront(page, '/');
 

@@ -1,7 +1,7 @@
 import { test, expect, gotoStorefront } from '../../fixtures/osp-test.js';
 import { contactEmail, footerLinks } from '../../fixtures/storefront-data.js';
 
-test.describe('Footer @regression @production', () => {
+test.describe('Footer', { tag: ['@regression', '@production'] }, () => {
   test('OSP-FTR-001 footer links point at live pages', async ({ page, request }) => {
     await gotoStorefront(page, '/');
     const footer = page.locator('footer');

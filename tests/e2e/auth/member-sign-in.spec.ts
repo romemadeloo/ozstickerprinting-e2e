@@ -4,7 +4,7 @@ import { AuthModal } from '../../pom/auth-modal.js';
 import { memberCredentials } from '../../fixtures/env.js';
 import { auth } from '../../fixtures/storefront-data.js';
 
-test.describe('Member sign in @auth @regression', () => {
+test.describe('Member sign in', { tag: ['@auth', '@regression'] }, () => {
   test('OSP-AUTH-009 a member can sign in with valid credentials', async ({ page }) => {
     refuseProduction('signs in a real account; run on a dev server with a QA member');
     test.skip(!memberCredentials, 'OSP_MEMBER_EMAIL / OSP_MEMBER_PASSWORD not set');

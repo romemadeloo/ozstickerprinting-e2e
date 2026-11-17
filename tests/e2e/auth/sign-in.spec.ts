@@ -3,7 +3,7 @@ import { Header } from '../../pom/header.js';
 import { AuthModal } from '../../pom/auth-modal.js';
 import { auth } from '../../fixtures/storefront-data.js';
 
-test.describe('Sign in modal @auth @regression @production', () => {
+test.describe('Sign in modal', { tag: ['@auth', '@regression', '@production'] }, () => {
   let modal: AuthModal;
 
   test.beforeEach(async ({ page }) => {
@@ -13,7 +13,7 @@ test.describe('Sign in modal @auth @regression @production', () => {
     await expect(modal.heading).toHaveText(auth.signInHeading);
   });
 
-  test('OSP-AUTH-001 sign-in modal shows member form and social logins @smoke', async () => {
+  test('OSP-AUTH-001 sign-in modal shows member form and social logins', { tag: '@smoke' }, async () => {
     await expect(modal.tab(auth.tabs.member)).toHaveClass(/selected/);
     await expect(modal.input(auth.labels.email)).toBeVisible();
     await expect(modal.input(auth.labels.password)).toHaveAttribute('type', 'password');
@@ -72,7 +72,7 @@ test.describe('Sign in modal @auth @regression @production', () => {
   });
 });
 
-test.describe('Register modal @auth @regression @production', () => {
+test.describe('Register modal', { tag: ['@auth', '@regression', '@production'] }, () => {
   test('OSP-AUTH-008 register modal validates required fields', async ({ page }) => {
     await gotoStorefront(page, '/');
     await new Header(page).openRegister();

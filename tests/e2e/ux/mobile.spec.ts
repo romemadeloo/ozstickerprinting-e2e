@@ -1,7 +1,7 @@
 import { test, expect, gotoStorefront } from '../../fixtures/osp-test.js';
 import { Header } from '../../pom/header.js';
 
-test.describe('Mobile layout @mobile @smoke @production', () => {
+test.describe('Mobile layout', { tag: ['@mobile', '@smoke', '@production'] }, () => {
   test('OSP-MOB-001 home page fits the phone width without horizontal scroll', async ({ page }) => {
     await gotoStorefront(page, '/');
 

@@ -2,7 +2,7 @@ import { test, expect } from '../../fixtures/osp-test.js';
 import { ProductConfigPage } from '../../pom/product-config-page.js';
 import { dieCut } from '../../fixtures/storefront-data.js';
 
-test.describe('Die cut configurator @regression @production', () => {
+test.describe('Die cut configurator', { tag: ['@regression', '@production'] }, () => {
   let product: ProductConfigPage;
 
   test.beforeEach(async ({ page }) => {
@@ -10,7 +10,7 @@ test.describe('Die cut configurator @regression @production', () => {
     await product.open();
   });
 
-  test('OSP-CFG-001 page opens with default options and a price @smoke', async () => {
+  test('OSP-CFG-001 page opens with default options and a price', { tag: '@smoke' }, async () => {
     await expect(product.heading).toHaveText('Die Cut Stickers');
     await expect(product.summary).toHaveText(dieCut.defaults.summary);
     await expect(product.widthInput).toHaveValue('30');
