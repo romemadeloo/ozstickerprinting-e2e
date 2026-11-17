@@ -1,0 +1,52 @@
+name: Playwright E2E
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target storefront
+        type: choice
+        options: [production, dev]
+        default: production
+      suite:
+        description: Which tests
+        type: choice
+        options: [smoke, full, mobile]
+        default: smoke
+  pull_request:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      E2E_ENVIRONMENT: ${{ inputs.environment || 'production' }}
+      OSP_DEV_BASE_URL: ${{ vars.OSP_DEV_BASE_URL }}
+      OSP_DEV_API_URL: ${{ vars.OSP_DEV_API_URL }}
+      OSP_MEMBER_EMAIL: ${{ secrets.OSP_MEMBER_EMAIL }}
+      OSP_MEMBER_PASSWORD: ${{ secrets.OSP_MEMBER_PASSWORD }}
+      PW_WORKERS: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run typecheck
+      - name: Run tests
+        run: |
+          case "${{ inputs.suite || 'smoke' }}" in
+            smoke)  npx playwright test --grep @smoke --grep-invert @destructive ;;
+            full)   npx playwright test --grep-invert @destructive ;;
+            mobile) E2E_BROWSER_PROJECT=chromium-mobile npx playwright test --grep @mobile ;;
+          esac
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14

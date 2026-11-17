@@ -1,0 +1,30 @@
+{
+  "name": "ozstickerprinting-e2e",
+  "version": "1.0.0",
+  "description": "Playwright + TypeScript E2E suite for the OzStickerPrinting storefront",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
+    "test:e2e:list": "playwright test --list",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ui": "playwright test --ui",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "test:auth": "playwright test --grep @auth",
+    "test:mobile": "cross-env E2E_BROWSER_PROJECT=chromium-mobile playwright test --grep @mobile",
+    "test:prod:smoke": "cross-env E2E_ENVIRONMENT=production playwright test --grep @smoke --grep-invert @destructive",
+    "test:prod:full": "cross-env E2E_ENVIRONMENT=production playwright test --grep-invert @destructive",
+    "test:destructive": "cross-env RUN_CART_E2E=true playwright test --grep @destructive --retries=0",
+    "report": "playwright show-report"
+  },
+  "license": "UNLICENSED",
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^24.19.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^17.4.2",
+    "typescript": "^5.9.3"
+  },
+  "private": true
+}
